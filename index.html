@@ -53,10 +53,10 @@
         }
         
         /* 原始样式开始 */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin:0; padding:0; box-sizing: border-box; }
         .container {
             max-width: 1200px;
-            margin: 0 auto;
+            margin:0 auto;
             background: white;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
@@ -84,7 +84,7 @@
             transition: all 0.3s ease;
             border-bottom: 3px solid transparent;
             white-space: nowrap;
-            font-size: 0.95em;
+            font-size:0.95em;
         }
         .nav-item:hover { background: #e9ecef; }
         .nav-item.active {
@@ -113,6 +113,7 @@
             border-radius: 15px;
             text-align: center;
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            position: relative;
         }
         .overview-card .number {
             font-size: 2.5em;
@@ -139,7 +140,7 @@
             border-bottom: 2px solid #e9ecef;
         }
         .day-title {
-            font-size: 1.3em;
+            font-size:1.3em;
             font-weight: bold;
             color: #333;
         }
@@ -253,7 +254,6 @@
             color: #666;
             margin: 8px 0;
         }
-        .attraction-info strong { color: #333; }
         .checklist-category {
             margin-bottom: 25px;
             padding: 20px;
@@ -473,6 +473,337 @@
             .time-badge { margin-bottom: 10px; min-width: auto; }
         }
         /* 原始样式结束 */
+
+        /* ========== 新增样式：编辑功能 ========== */
+        .edit-toggle-bar {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        .edit-toggle-btn {
+            padding: 8px 18px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+        .edit-toggle-btn:hover, .edit-toggle-btn.active {
+            background: #667eea;
+            color: white;
+        }
+        .edit-mode .attraction-card {
+            border-color: #ffc107;
+        }
+        .edit-mode .checklist-category {
+            border: 2px dashed #ffc107;
+        }
+        .add-btn {
+            padding: 10px 20px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.95em;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .add-btn:hover { background: #218838; }
+        .delete-item-btn {
+            padding: 4px 12px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8em;
+            margin-left: 8px;
+        }
+        .inline-edit-input {
+            padding: 6px 10px;
+            border: 2px solid #667eea;
+            border-radius: 6px;
+            font-size: 0.95em;
+            width: 100%;
+            margin: 4px 0;
+        }
+        .edit-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .save-edit-btn {
+            padding: 5px 14px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.85em;
+        }
+        .cancel-edit-btn {
+            padding: 5px 14px;
+            background: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.85em;
+        }
+        .overview-card .edit-overview-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(255,255,255,0.3);
+            border: none;
+            color: white;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ========== 新增样式：照片上传 ========== */
+        .photo-upload-area {
+            margin-top: 12px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            display: none;
+        }
+        .attraction-card.expanded .photo-upload-area {
+            display: block;
+        }
+        .photo-upload-label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            border: 2px dashed #667eea;
+            border-radius: 10px;
+            cursor: pointer;
+            color: #667eea;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+        .photo-upload-label:hover {
+            background: #f0f4ff;
+        }
+        .photo-upload-label .upload-icon {
+            font-size: 2em;
+            margin-bottom: 8px;
+        }
+        .photo-input {
+            display: none;
+        }
+        .photo-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        .photo-thumb {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid #e9ecef;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .photo-thumb:hover {
+            transform: scale(1.05);
+            border-color: #667eea;
+        }
+        .photo-thumb-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+        .photo-delete-btn {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            font-size: 0.7em;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .expand-photos-btn {
+            margin-top: 10px;
+            padding: 6px 14px;
+            background: #17a2b8;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85em;
+        }
+
+        /* ========== 新增样式：分享页面 ========== */
+        .share-preview-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .share-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .share-card-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .share-card-body {
+            padding: 20px;
+        }
+        .share-attraction-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border-bottom: 1px solid #e9ecef;
+            gap: 12px;
+        }
+        .share-attraction-item:last-child {
+            border-bottom: none;
+        }
+        .share-attraction-photos {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 8px;
+        }
+        .share-photo {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 6px;
+        }
+        .share-text-area {
+            width: 100%;
+            min-height: 150px;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1em;
+            font-family: inherit;
+            resize: vertical;
+            margin-top: 15px;
+        }
+        .share-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        .share-action-btn {
+            flex: 1;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            min-width: 140px;
+        }
+        .share-wechat-btn {
+            background: #07c160;
+            color: white;
+        }
+        .share-wechat-btn:hover { background: #06ad56; }
+        .share-copy-btn {
+            background: #667eea;
+            color: white;
+        }
+        .share-copy-btn:hover { background: #5568d3; }
+        .share-save-img-btn {
+            background: #ffc107;
+            color: #333;
+        }
+        .share-save-img-btn:hover { background: #e0a800; }
+
+        /* ========== 新增样式：照片灯箱 ========== */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .lightbox.active { display: flex; }
+        .lightbox-img {
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 10px;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2em;
+            cursor: pointer;
+        }
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            font-size: 2em;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .lightbox-prev { left: 20px; }
+        .lightbox-next { right: 20px; }
+
+        /* ========== 新增样式：分享页面头部 ========== */
+        .share-header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .no-data-tip {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+            font-size: 1.1em;
+        }
+        .no-data-tip .no-data-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 <body>
@@ -482,13 +813,17 @@
             <p>👆 点击右上角 ···</p>
             <p>选择"发送给朋友"或"分享到朋友圈"</p>
         </div>
-        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 18px; text-align: center;">
-            <p>邀请朋友一起查看</p>
-        </div>
+    </div>
+
+    <!-- 照片灯箱 -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+        <button class="lightbox-nav lightbox-prev" onclick="lightboxNav(-1)">‹</button>
+        <img class="lightbox-img" id="lightbox-img" src="" alt="照片">
+        <button class="lightbox-nav lightbox-next" onclick="lightboxNav(1)">›</button>
     </div>
     
     <div class="container">
-        <!-- 其余内容保持不变 -->
         <div class="header">
             <h1>✈️ 关西7日游 旅游攻略</h1>
             <div class="meta">2026年5月4日(周日) 至 5月10日(周六) | 共7天6晚</div>
@@ -500,28 +835,17 @@
             <div class="nav-item" onclick="switchSection('attractions')">📍 景点打卡</div>
             <div class="nav-item" onclick="switchSection('checklist')">📋 行前清单</div>
             <div class="nav-item" onclick="switchSection('expenses')">💰 消费记录</div>
+            <div class="nav-item" onclick="switchSection('share')">🔗 分享</div>
         </div>
         
         <div class="content">
             <!-- 行程概览 -->
             <div id="overview" class="section active">
-                <div class="overview-cards">
-                    <div class="overview-card">
-                        <div class="number">7</div>
-                        <div class="label">总天数</div>
-                    </div>
-                    <div class="overview-card">
-                        <div class="number">12+</div>
-                        <div class="label">景点数</div>
-                    </div>
-                    <div class="overview-card">
-                        <div class="number">3</div>
-                        <div class="label">城市</div>
-                    </div>
-                    <div class="overview-card">
-                        <div class="number" id="checked-count">0</div>
-                        <div class="label">已打卡</div>
-                    </div>
+                <div class="edit-toggle-bar">
+                    <button class="edit-toggle-btn" id="overview-edit-btn" onclick="toggleOverviewEdit()">✏️ 编辑概览</button>
+                </div>
+                <div class="overview-cards" id="overview-cards">
+                    <!-- 由JS动态渲染 -->
                 </div>
                 
                 <div class="tips-box">
@@ -537,183 +861,8 @@
                 </div>
                 
                 <h2 style="margin-top: 30px; margin-bottom: 20px;">📅 行程时间轴</h2>
-                <!-- 行程内容保持不变 -->
-                <div class="day-card">
-                    <div class="day-header">
-                        <div class="day-title">Day 1 - 抵达关西</div>
-                        <div class="day-date">5.04 周日</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="time-badge">14:10-15:00</div>
-                        <div class="timeline-content">
-                            <div class="timeline-title">抵达关西机场，取行李，购买ICOCA&Haruka套票</div>
-                            <div class="timeline-location">📍 关西国际机场</div>
-                            <div class="timeline-transport">机场内办理</div>
-                            <div class="timeline-tips">💡 建议提前线上买好套票，现场直接取票节省时间</div>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="time-badge">15:00-16:15</div>
-                        <div class="timeline-content">
-                            <div class="timeline-title">乘坐Haruka特急列车前往京都</div>
-                            <div class="timeline-location">📍 关西机场 → 京都站</div>
-                            <div class="timeline-transport">Haruka特急（约75分钟）</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- 其余行程内容省略，保持原样 -->
-                <div class="day-card">
-                    <div class="day-header">
-                        <div class="day-title">Day 2 - 京都经典游</div>
-                        <div class="day-date">5.05 周一</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="time-badge">08:30-11:30</div>
-                        <div class="timeline-content">
-                            <div class="timeline-title">清水寺、清水舞台</div>
-                            <div class="timeline-location">📍 清水寺</div>
-                            <div class="timeline-transport">市巴士100/206路（约15分钟）</div>
-                            <div class="timeline-tips">💡 世界文化遗产，春季新绿绝美，开门即到避开人流</div>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="time-badge">11:30-12:30</div>
-                        <div class="timeline-content">
-                            <div class="timeline-title">二年坂·三年坂传统街区</div>
-                            <div class="timeline-location">📍 二年坂·三年坂</div>
-                            <div class="timeline-transport">步行</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="day-card">
-                    <div class="day-header">
-                        <div class="day-title">Day 3 - 京都北部 + 前往大阪</div>
-                        <div class="day-date">5.06 周二</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="time-badge">08:30-10:30</div>
-                        <div class="timeline-content">
-                            <div class="timeline-title">金阁寺（鹿苑寺）⭐ 重点</div>
-                            <div class="timeline-location">📍 金阁寺</div>
-                            <div class="timeline-transport">市巴士101路（约30分钟）</div>
-                            <div class="timeline-tips">💡 建议8:30前到达！金箔楼阁倒映湖中，5月新绿背景绝美</div>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="time-badge">10:30-11:30</div>
-                        <div class="timeline-content">
-                            <div class="timeline-title">龙安寺石庭</div>
-                            <div class="timeline-location">📍 龙安寺</div>
-                            <div class="timeline-transport">步行（约15分钟）</div>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="time-badge">14:00-14:45</div>
-                        <div class="timeline-content">
-                            <div class="timeline-title">乘坐JR前往大阪</div>
-                            <div class="timeline-location">📍 京都站 → 大阪站</div>
-                            <div class="timeline-transport">JR东海道本线新快速（约30分钟）</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="day-card">
-                    <div class="day-header">
-                        <div class="day-title">Day 4 - 环球影城</div>
-                        <div class="day-date">5.07 周三</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="time-badge">09:00-20:00</div>
-                        <div class="timeline-content">
-                            <div class="timeline-title">日本环球影城（USJ）全天 ⭐ 重点</div>
-                            <div class="timeline-location">📍 日本环球影城</div>
-                            <div class="timeline-transport">JR樱岛线（约20分钟）</div>
-                            <div class="timeline-tips">💡 必玩：任天堂世界、哈利波特魔法世界、小黄人乐园<br>💡 下载USJ APP查看排队时间<br>💡 建议开园前到达（8:30前）</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="day-card">
-                    <div class="day-header">
-                        <div class="day-title">Day 5 - 宇治 + 奈良</div>
-                        <div class="day-date">5.08 周四</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="time-badge">09:30-11:30</div>
-                        <div class="timeline-content">
-                            <div class="timeline-title">宇治平等院、中村藤吉本店</div>
-                            <div class="timeline-location">📍 宇治</div>
-                            <div class="timeline-transport">JR奈良线（约40分钟）</div>
-                            <div class="timeline-tips">💡 平等院是10日元硬币背景，宇治抹茶是顶级抹茶产地</div>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="time-badge">12:30-17:00</div>
-                        <div class="timeline-content">
-                            <div class="timeline-title">奈良公园喂小鹿、东大寺、春日大社</div>
-                            <div class="timeline-location">📍 奈良公园</div>
-                            <div class="timeline-transport">JR奈良线（约20分钟）</div>
-                            <div class="timeline-tips">💡 小鹿很温顺，可以买鹿仙贝喂它们<br>💡 东大寺是世界文化遗产</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="day-card">
-                    <div class="day-header">
-                        <div class="day-title">Day 6 - 大阪购物</div>
-                        <div class="day-date">5.09 周五</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="time-badge">10:00-12:30</div>
-                        <div class="timeline-content">
-                            <div class="timeline-title">心斋桥筋商店街购物</div>
-                            <div class="timeline-location">📍 心斋桥</div>
-                            <div class="timeline-transport">地铁/步行</div>
-                            <div class="timeline-tips">💡 药妆店：松本清、堂吉诃德；服装、零食应有尽有</div>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="time-badge">14:00-16:00</div>
-                        <div class="timeline-content">
-                            <div class="timeline-title">黑门市场逛吃</div>
-                            <div class="timeline-location">📍 黑门市场</div>
-                            <div class="timeline-transport">步行</div>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="time-badge">16:30-20:00</div>
-                        <div class="timeline-content">
-                            <div class="timeline-title">梅田商圈购物 + HEP FIVE摩天轮夜景</div>
-                            <div class="timeline-location">📍 梅田</div>
-                            <div class="timeline-transport">地铁</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="day-card">
-                    <div class="day-header">
-                        <div class="day-title">Day 7 - 返程</div>
-                        <div class="day-date">5.10 周六</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="time-badge">10:00-12:00</div>
-                        <div class="timeline-content">
-                            <div class="timeline-title">大阪城、天守阁</div>
-                            <div class="timeline-location">📍 大阪城公园</div>
-                            <div class="timeline-transport">地铁谷町线（约15分钟）</div>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="time-badge">13:00-14:30</div>
-                        <div class="timeline-content">
-                            <div class="timeline-title">前往关西机场</div>
-                            <div class="timeline-location">📍 大阪 → 关西机场</div>
-                            <div class="timeline-transport">南海电铁特急（约50分钟）</div>
-                            <div class="timeline-tips">💡 16:00的航班，提前2小时到机场足够</div>
-                        </div>
-                    </div>
+                <div id="overview-timeline">
+                    <!-- 由JS动态渲染 -->
                 </div>
             </div>
             
@@ -725,16 +874,24 @@
             
             <!-- 景点打卡 -->
             <div id="attractions" class="section">
-                <h2 style="margin-bottom: 20px;">📍 景点打卡</h2>
-                <div style="margin-bottom: 15px; color: #667eea; font-weight: bold; font-size: 1.1em;">
-                    已打卡：<span id="attraction-stats">0</span> / 12
+                <div class="edit-toggle-bar">
+                    <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+                        <span style="font-weight:bold; color:#667eea; font-size:1.1em;">
+                            已打卡：<span id="attraction-stats">0</span> / <span id="attraction-total">12</span>
+                        </span>
+                        <button class="add-btn" onclick="showAddAttractionModal()">＋ 添加景点</button>
+                    </div>
+                    <button class="edit-toggle-btn" onclick="toggleAttractionsEdit()">🗑️ 管理景点</button>
                 </div>
                 <div class="attractions-grid" id="attractions-container"></div>
             </div>
             
             <!-- 行前清单 -->
             <div id="checklist" class="section">
-                <h2 style="margin-bottom: 20px;">📋 行前清单</h2>
+                <div class="edit-toggle-bar">
+                    <button class="add-btn" onclick="showAddCategoryModal()">＋ 添加分类</button>
+                    <button class="edit-toggle-btn" onclick="toggleChecklistEdit()">🗑️ 管理清单</button>
+                </div>
                 <div id="checklist-container"></div>
             </div>
             
@@ -810,29 +967,231 @@
                     <tbody id="expense-list"></tbody>
                 </table>
             </div>
+
+            <!-- 分享页面 -->
+            <div id="share" class="section">
+                <div class="share-header-bar">
+                    <h2 style="margin:0;">🔗 生成分享</h2>
+                    <button class="btn" onclick="generateShare()">🔄 刷新预览</button>
+                </div>
+                <div id="share-content">
+                    <div class="no-data-tip">
+                        <div class="no-data-icon">📷</div>
+                        <p>还没有打卡照片</p>
+                        <p style="font-size:0.9em; margin-top:8px;">去"景点打卡"页面打卡并上传照片后，<br>再来生成分享内容吧！</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 添加景点模态框 -->
+    <div id="add-attraction-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:9998; align-items:center; justify-content:center;">
+        <div style="background:white; border-radius:15px; padding:30px; max-width:500px; width:90%; max-height:80vh; overflow-y:auto;">
+            <h3 style="margin-bottom:20px;">＋ 添加新景点</h3>
+            <div style="display:flex; flex-direction:column; gap:15px;">
+                <div>
+                    <label style="font-weight:bold;">景点名称</label>
+                    <input type="text" id="new-attr-name" class="inline-edit-input" placeholder="如：伏见稻荷">
+                </div>
+                <div>
+                    <label style="font-weight:bold;">推荐时间</label>
+                    <input type="text" id="new-attr-time" class="inline-edit-input" placeholder="如：09:00-11:00">
+                </div>
+                <div>
+                    <label style="font-weight:bold;">门票价格</label>
+                    <input type="text" id="new-attr-ticket" class="inline-edit-input" placeholder="如：免费 / 500日元">
+                </div>
+                <div>
+                    <label style="font-weight:bold;">简介</label>
+                    <input type="text" id="new-attr-info" class="inline-edit-input" placeholder="简短描述">
+                </div>
+            </div>
+            <div style="display:flex; gap:10px; margin-top:20px;">
+                <button class="btn" onclick="addNewAttraction()" style="flex:1;">✅ 添加</button>
+                <button class="cancel-edit-btn" onclick="closeAddAttractionModal()" style="flex:1;">取消</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 添加分类模态框 -->
+    <div id="add-category-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:9998; align-items:center; justify-content:center;">
+        <div style="background:white; border-radius:15px; padding:30px; max-width:500px; width:90%;">
+            <h3 style="margin-bottom:20px;">＋ 添加新分类</h3>
+            <div style="display:flex; flex-direction:column; gap:15px;">
+                <div>
+                    <label style="font-weight:bold;">分类名称</label>
+                    <input type="text" id="new-cat-name" class="inline-edit-input" placeholder="如：🎒 户外用品">
+                </div>
+            </div>
+            <div style="display:flex; gap:10px; margin-top:20px;">
+                <button class="btn" onclick="addNewCategory()" style="flex:1;">✅ 添加</button>
+                <button class="cancel-edit-btn" onclick="closeAddCategoryModal()" style="flex:1;">取消</button>
+            </div>
         </div>
     </div>
     
     <script>
-        // 判断是否在微信中
-        function isWeChat() {
-            const ua = navigator.userAgent.toLowerCase();
-            return ua.indexOf('micromessenger') !== -1;
+        // ========== IndexedDB 照片存储 ==========
+        const DB_NAME = 'TravelPhotoDB';
+        const DB_VERSION = 1;
+        const STORE_NAME = 'photos';
+        let db = null;
+
+        function openPhotoDB() {
+            return new Promise((resolve, reject) => {
+                const request = indexedDB.open(DB_NAME, DB_VERSION);
+                request.onupgradeneeded = function(e) {
+                    const database = e.target.result;
+                    if (!database.objectStoreNames.contains(STORE_NAME)) {
+                        database.createObjectStore(STORE_NAME, { keyPath: 'id' });
+                    }
+                };
+                request.onsuccess = function(e) {
+                    db = e.target.result;
+                    resolve(db);
+                };
+                request.onerror = function(e) {
+                    reject('数据库打开失败');
+                };
+            });
         }
-        
-        // 显示微信分享引导
-        function showShareTip() {
-            if (isWeChat()) {
-                const tip = document.getElementById('wechat-share-tip');
-                tip.style.display = 'block';
-                setTimeout(() => {
-                    tip.style.display = 'none';
-                }, 3000);
-            } else {
-                alert('请在微信中打开此页面以使用分享功能');
+
+        function savePhotoToDB(attractionId, photoData) {
+            return new Promise((resolve, reject) => {
+                const transaction = db.transaction([STORE_NAME], 'readwrite');
+                const store = transaction.objectStore(STORE_NAME);
+                const id = attractionId + '_' + Date.now();
+                const record = { id, attractionId, photoData, createdAt: new Date().toISOString() };
+                const request = store.add(record);
+                request.onsuccess = () => resolve(id);
+                request.onerror = () => reject('保存失败');
+            });
+        }
+
+        function getPhotosByAttractionId(attractionId) {
+            return new Promise((resolve, reject) => {
+                const transaction = db.transaction([STORE_NAME], 'readonly');
+                const store = transaction.objectStore(STORE_NAME);
+                const allPhotos = [];
+                const request = store.openCursor();
+                request.onsuccess = function(e) {
+                    const cursor = e.target.result;
+                    if (cursor) {
+                        if (cursor.value.attractionId === attractionId) {
+                            allPhotos.push(cursor.value);
+                        }
+                        cursor.continue();
+                    } else {
+                        resolve(allPhotos);
+                    }
+                };
+                request.onerror = () => reject('读取失败');
+            });
+        }
+
+        function getAllPhotos() {
+            return new Promise((resolve, reject) => {
+                const transaction = db.transaction([STORE_NAME], 'readonly');
+                const store = transaction.objectStore(STORE_NAME);
+                const allPhotos = [];
+                const request = store.openCursor();
+                request.onsuccess = function(e) {
+                    const cursor = e.target.result;
+                    if (cursor) {
+                        allPhotos.push(cursor.value);
+                        cursor.continue();
+                    } else {
+                        resolve(allPhotos);
+                    }
+                };
+                request.onerror = () => reject('读取失败');
+            });
+        }
+
+        function deletePhotoFromDB(photoId) {
+            return new Promise((resolve, reject) => {
+                const transaction = db.transaction([STORE_NAME], 'readwrite');
+                const store = transaction.objectStore(STORE_NAME);
+                const request = store.delete(photoId);
+                request.onsuccess = () => resolve();
+                request.onerror = () => reject('删除失败');
+            });
+        }
+
+        // ========== 全局状态 ==========
+        let overviewEditMode = false;
+        let attractionsEditMode = false;
+        let checklistEditMode = false;
+
+        // 行程概览卡片数据（可编辑）
+        let overviewCards = [
+            { id: 1, number: '7', label: '总天数' },
+            { id: 2, number: '12+', label: '景点数' },
+            { id: 3, number: '3', label: '城市' },
+            { id: 4, number: '0', label: '已打卡' }
+        ];
+
+        // 行程时间轴数据（可编辑）
+        let timelineDays = [
+            {
+                title: 'Day 1 - 抵达关西',
+                date: '5.04 周日',
+                items: [
+                    { time: '14:10-15:00', title: '抵达关西机场，取行李，购买ICOCA&Haruka套票', location: '关西国际机场', transport: '机场内办理', tips: '建议提前线上买好套票，现场直接取票节省时间' }
+                ]
+            },
+            {
+                title: 'Day 2 - 京都经典游',
+                date: '5.05 周一',
+                items: [
+                    { time: '08:30-11:30', title: '清水寺、清水舞台', location: '清水寺', transport: '市巴士100/206路（约15分钟）', tips: '世界文化遗产，春季新绿绝美，开门即到避开人流' },
+                    { time: '11:30-12:30', title: '二年坂·三年坂传统街区', location: '二年坂·三年坂', transport: '步行', tips: '' }
+                ]
+            },
+            {
+                title: 'Day 3 - 京都北部 + 前往大阪',
+                date: '5.06 周二',
+                items: [
+                    { time: '08:30-10:30', title: '金阁寺（鹿苑寺）⭐ 重点', location: '金阁寺', transport: '市巴士101路（约30分钟）', tips: '建议8:30前到达！金箔楼阁倒映湖中，5月新绿背景绝美' },
+                    { time: '10:30-11:30', title: '龙安寺石庭', location: '龙安寺', transport: '步行（约15分钟）', tips: '' },
+                    { time: '14:00-14:45', title: '乘坐JR前往大阪', location: '京都站 → 大阪站', transport: 'JR东海道本线新快速（约30分钟）', tips: '' }
+                ]
+            },
+            {
+                title: 'Day 4 - 环球影城',
+                date: '5.07 周三',
+                items: [
+                    { time: '09:00-20:00', title: '日本环球影城（USJ）全天 ⭐ 重点', location: '日本环球影城', transport: 'JR樱岛线（约20分钟）', tips: '必玩：任天堂世界、哈利波特魔法世界、小黄人乐园\n💡 下载USJ APP查看排队时间\n💡 建议开园前到达（8:30前）' }
+                ]
+            },
+            {
+                title: 'Day 5 - 宇治 + 奈良',
+                date: '5.08 周四',
+                items: [
+                    { time: '09:30-11:30', title: '宇治平等院、中村藤吉本店', location: '宇治', transport: 'JR奈良线（约40分钟）', tips: '平等院是10日元硬币背景，宇治抹茶是顶级抹茶产地' },
+                    { time: '12:30-17:00', title: '奈良公园喂小鹿、东大寺、春日大社', location: '奈良公园', transport: 'JR奈良线（约20分钟）', tips: '小鹿很温顺，可以买鹿仙贝喂它们\n💡 东大寺是世界文化遗产' }
+                ]
+            },
+            {
+                title: 'Day 6 - 大阪购物',
+                date: '5.09 周五',
+                items: [
+                    { time: '10:00-12:30', title: '心斋桥筋商店街购物', location: '心斋桥', transport: '地铁/步行', tips: '药妆店：松本清、堂吉诃德；服装、零食应有尽有' },
+                    { time: '14:00-16:00', title: '黑门市场逛吃', location: '黑门市场', transport: '步行', tips: '' },
+                    { time: '16:30-20:00', title: '梅田商圈购物 + HEP FIVE摩天轮夜景', location: '梅田', transport: '地铁', tips: '' }
+                ]
+            },
+            {
+                title: 'Day 7 - 返程',
+                date: '5.10 周六',
+                items: [
+                    { time: '10:00-12:00', title: '大阪城、天守阁', location: '大阪城公园', transport: '地铁谷町线（约15分钟）', tips: '' },
+                    { time: '13:00-14:30', title: '前往关西机场', location: '大阪 → 关西机场', transport: '南海电铁特急（约50分钟）', tips: '16:00的航班，提前2小时到机场足够' }
+                ]
             }
-        }
-        
+        ];
+
         // 景点数据
         let attractions = [
             { id: 1, name: '清水寺', checked: false, checkinTime: null,
@@ -860,8 +1219,8 @@
             { id: 12, name: '道顿堀', checked: false, checkinTime: null,
               info: '格力高跑男广告牌，美食街', time: '16:00-20:00', ticket: '免费' }
         ];
-        
-        // 行前清单数据（根据日本旅行定制）
+
+        // 行前清单数据
         let checklist = [
             {
                 name: '📄 证件类',
@@ -920,7 +1279,7 @@
                 ]
             },
             {
-                name: '📦 其他',
+                name: '🎒 其他',
                 items: [
                     { name: '行李箱（24-28寸）', checked: false },
                     { name: '随身包', checked: false },
@@ -932,25 +1291,142 @@
         ];
         
         let expenses = [];
-        
-        // 页面初始化
+
+        // ========== 初始化 ==========
         window.onload = function() {
-            loadFromLocalStorage();
-            renderAttractions();
-            renderChecklist();
-            renderExpenses();
-            updateStats();
+            openPhotoDB().then(() => {
+                loadFromLocalStorage();
+                renderOverview();
+                renderTimeline();
+                renderAttractions();
+                renderChecklist();
+                renderExpenses();
+                updateStats();
+            }).catch(err => {
+                console.error('数据库初始化失败:', err);
+                loadFromLocalStorage();
+                renderOverview();
+                renderTimeline();
+                renderAttractions();
+                renderChecklist();
+                renderExpenses();
+                updateStats();
+            });
         };
-        
-        // 切换页面
+
+        // ========== 页面切换 ==========
         function switchSection(sectionId) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
             document.getElementById(sectionId).classList.add('active');
             event.target.classList.add('active');
+            if (sectionId === 'share') {
+                generateShare();
+            }
         }
-        
-        // 渲染景点
+
+        // ========== 行程概览：渲染 & 编辑 ==========
+        function renderOverview() {
+            const container = document.getElementById('overview-cards');
+            container.innerHTML = '';
+            overviewCards.forEach((card, index) => {
+                const div = document.createElement('div');
+                div.className = 'overview-card';
+                if (overviewEditMode) {
+                    div.innerHTML = `
+                        <input class="inline-edit-input" value="${card.number}" style="color:#333; font-size:2em; font-weight:bold; text-align:center; margin-bottom:5px; background:rgba(255,255,255,0.9); border-color:#ffc107;" data-field="number" data-index="${index}">
+                        <input class="inline-edit-input" value="${card.label}" style="color:#333; text-align:center; background:rgba(255,255,255,0.9); border-color:#ffc107;" data-field="label" data-index="${index}">
+                        <button class="delete-item-btn" onclick="deleteOverviewCard(${index})" style="position:absolute;top:8px;right:8px;">删除</button>
+                    `;
+                    // 实时保存输入
+                    div.querySelectorAll('input').forEach(input => {
+                        input.addEventListener('input', function() {
+                            const idx = parseInt(this.dataset.index);
+                            const field = this.dataset.field;
+                            overviewCards[idx][field] = this.value;
+                            saveToLocalStorage();
+                        });
+                    });
+                } else {
+                    div.innerHTML = `
+                        <div class="number">${card.number}</div>
+                        <div class="label">${card.label}</div>
+                    `;
+                    if (card.label === '已打卡') {
+                        div.querySelector('.number').textContent = attractions.filter(a => a.checked).length;
+                    }
+                }
+                container.appendChild(div);
+            });
+        }
+
+        function toggleOverviewEdit() {
+            overviewEditMode = !overviewEditMode;
+            document.getElementById('overview-edit-btn').classList.toggle('active');
+            renderOverview();
+        }
+
+        function deleteOverviewCard(index) {
+            if (confirm('确定删除这个概览卡片吗？')) {
+                overviewCards.splice(index, 1);
+                renderOverview();
+                saveToLocalStorage();
+            }
+        }
+
+        // ========== 行程时间轴：渲染 ==========
+        function renderTimeline() {
+            const container = document.getElementById('overview-timeline');
+            if (!container) return;
+            container.innerHTML = '';
+            timelineDays.forEach((day, dayIndex) => {
+                const dayCard = document.createElement('div');
+                dayCard.className = 'day-card';
+                let itemsHtml = day.items.map((item, itemIndex) => `
+                    <div class="timeline-item">
+                        <div class="time-badge">${item.time}</div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">${item.title}</div>
+                            <div class="timeline-location">📍 ${item.location}</div>
+                            <div class="timeline-transport">${item.transport}</div>
+                            ${item.tips ? `<div class="timeline-tips">💡 ${item.tips}</div>` : ''}
+                        </div>
+                        ${overviewEditMode ? `<button class="delete-item-btn" onclick="deleteTimelineItem(${dayIndex}, ${itemIndex})">删除</button>` : ''}
+                    </div>
+                `).join('');
+                dayCard.innerHTML = `
+                    <div class="day-header">
+                        <div class="day-title">${day.title}</div>
+                        <div class="day-date">${day.date}</div>
+                        ${overviewEditMode ? `<button class="add-btn" onclick="addTimelineItem(${dayIndex})" style="padding:6px 12px; font-size:0.85em;">＋ 添加</button>` : ''}
+                    </div>
+                    ${itemsHtml}
+                `;
+                container.appendChild(dayCard);
+            });
+        }
+
+        function addTimelineItem(dayIndex) {
+            const title = prompt('活动标题：');
+            if (!title) return;
+            const time = prompt('时间：') || '';
+            const location = prompt('地点：') || '';
+            const transport = prompt('交通方式：') || '';
+            const tips = prompt('小贴士（可选）：') || '';
+            timelineDays[dayIndex].items.push({ time, title, location, transport, tips });
+            renderTimeline();
+            saveToLocalStorage();
+        }
+
+        function deleteTimelineItem(dayIndex, itemIndex) {
+            if (confirm('确定删除这个时间节点吗？')) {
+                timelineDays[dayIndex].items.splice(itemIndex, 1);
+                renderTimeline();
+                saveToLocalStorage();
+            }
+        }
+
+        // ========== 景点打卡：渲染 & 编辑 & 照片 ==========
         function renderAttractions() {
             const container = document.getElementById('attractions-container');
             container.innerHTML = '';
@@ -959,6 +1435,9 @@
                 const card = document.createElement('div');
                 card.className = 'attraction-card' + (attr.checked ? ' checked' : '');
                 card.id = `attraction-${index}`;
+                
+                let deleteBtnHtml = attractionsEditMode ? `<button class="delete-item-btn" onclick="deleteAttraction(${index})">删除</button>` : '';
+                
                 card.innerHTML = `
                     <button class="check-btn" onclick="toggleCheckin(${index})">
                         ${attr.checked ? '✓' : ''}
@@ -968,21 +1447,203 @@
                     <div class="attraction-info"><strong>🎫 门票：</strong>${attr.ticket}</div>
                     <div class="attraction-info">${attr.info}</div>
                     ${attr.checked ? `<div class="attraction-info" style="color: #28a745; margin-top: 10px;">✓ 打卡于 ${attr.checkinTime}</div>` : ''}
+                    <div class="photo-upload-area" id="photo-area-${index}">
+                        <label class="photo-upload-label" onclick="triggerPhotoUpload(${index})">
+                            <div class="upload-icon">📷</div>
+                            <div>点击上传照片</div>
+                        </label>
+                        <input type="file" class="photo-input" id="photo-input-${index}" accept="image/*" multiple onchange="handlePhotoUpload(${index}, this)">
+                        <div class="photo-gallery" id="gallery-${index}"></div>
+                    </div>
+                    ${deleteBtnHtml}
                 `;
+                
+                // 点击展开/收起照片区域
+                card.addEventListener('click', function(e) {
+                    if (e.target.closest('.check-btn') || e.target.closest('.delete-item-btn') || e.target.closest('.photo-upload-label') || e.target.closest('.photo-input')) return;
+                    if (attr.checked || attractionsEditMode) {
+                        this.classList.toggle('expanded');
+                        if (this.classList.contains('expanded') && attr.checked) {
+                            loadAttractionPhotos(index);
+                        }
+                    }
+                });
+                
                 container.appendChild(card);
             });
+            
+            document.getElementById('attraction-stats').textContent = attractions.filter(a => a.checked).length;
+            document.getElementById('attraction-total').textContent = attractions.length;
         }
-        
-        // 切换打卡状态
+
         function toggleCheckin(index) {
             attractions[index].checked = !attractions[index].checked;
             attractions[index].checkinTime = attractions[index].checked ? new Date().toLocaleString('zh-CN') : null;
             renderAttractions();
             updateStats();
             saveToLocalStorage();
+            // 自动展开照片区域
+            if (attractions[index].checked) {
+                const card = document.getElementById(`attraction-${index}`);
+                if (card) card.classList.add('expanded');
+                loadAttractionPhotos(index);
+            }
         }
-        
-        // 渲染清单
+
+        function deleteAttraction(index) {
+            if (confirm(`确定删除景点"${attractions[index].name}"吗？`)) {
+                attractions.splice(index, 1);
+                renderAttractions();
+                updateStats();
+                saveToLocalStorage();
+            }
+        }
+
+        function toggleAttractionsEdit() {
+            attractionsEditMode = !attractionsEditMode;
+            renderAttractions();
+        }
+
+        function showAddAttractionModal() {
+            document.getElementById('add-attraction-modal').style.display = 'flex';
+        }
+        function closeAddAttractionModal() {
+            document.getElementById('add-attraction-modal').style.display = 'none';
+            document.getElementById('new-attr-name').value = '';
+            document.getElementById('new-attr-time').value = '';
+            document.getElementById('new-attr-ticket').value = '';
+            document.getElementById('new-attr-info').value = '';
+        }
+        function addNewAttraction() {
+            const name = document.getElementById('new-attr-name').value.trim();
+            if (!name) { alert('请输入景点名称'); return; }
+            const time = document.getElementById('new-attr-time').value.trim();
+            const ticket = document.getElementById('new-attr-ticket').value.trim();
+            const info = document.getElementById('new-attr-info').value.trim();
+            attractions.push({
+                id: Date.now(),
+                name,
+                checked: false,
+                checkinTime: null,
+                info: info || '暂无简介',
+                time: time || '待定',
+                ticket: ticket || '待定'
+            });
+            closeAddAttractionModal();
+            renderAttractions();
+            updateStats();
+            saveToLocalStorage();
+        }
+
+        // ========== 照片上传 & 展示 ==========
+        function triggerPhotoUpload(index) {
+            if (!attractions[index].checked) {
+                alert('请先打卡这个景点，再上传照片！');
+                return;
+            }
+            document.getElementById(`photo-input-${index}`).click();
+        }
+
+        function handlePhotoUpload(index, input) {
+            if (!db) {
+                alert('照片数据库未就绪，请刷新重试');
+                return;
+            }
+            const files = input.files;
+            if (!files.length) return;
+            
+            Array.from(files).forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    // 压缩图片
+                    compressImage(e.target.result, 800, 0.7).then(compressed => {
+                        savePhotoToDB(attractions[index].id, compressed).then(() => {
+                            loadAttractionPhotos(index);
+                        }).catch(err => {
+                            console.error('保存照片失败:', err);
+                        });
+                    });
+                };
+                reader.readAsDataURL(file);
+            });
+            input.value = '';
+        }
+
+        function compressImage(dataUrl, maxWidth, quality) {
+            return new Promise((resolve) => {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    let width = img.width;
+                    let height = img.height;
+                    if (width > maxWidth) {
+                        height = (height * maxWidth) / width;
+                        width = maxWidth;
+                    }
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+                    resolve(canvas.toDataURL('image/jpeg', quality));
+                };
+                img.src = dataUrl;
+            });
+        }
+
+        function loadAttractionPhotos(index) {
+            if (!db) return;
+            const attrId = attractions[index].id;
+            getPhotosByAttractionId(attrId).then(photos => {
+                const gallery = document.getElementById(`gallery-${index}`);
+                if (!gallery) return;
+                gallery.innerHTML = '';
+                photos.forEach(photo => {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'photo-thumb-wrapper';
+                    wrapper.innerHTML = `
+                        <img class="photo-thumb" src="${photo.photoData}" alt="打卡照片" onclick="openLightbox('${photo.photoData}')">
+                        <button class="photo-delete-btn" onclick="deletePhoto(${index}, '${photo.id}', event)">✕</button>
+                    `;
+                    gallery.appendChild(wrapper);
+                });
+            });
+        }
+
+        function deletePhoto(attrIndex, photoId, event) {
+            event.stopPropagation();
+            if (!confirm('确定删除这张照片吗？')) return;
+            deletePhotoFromDB(photoId).then(() => {
+                loadAttractionPhotos(attrIndex);
+            });
+        }
+
+        // ========== 灯箱 ==========
+        let lightboxPhotos = [];
+        let lightboxIndex = 0;
+
+        function openLightbox(dataUrl) {
+            // 收集所有打卡照片
+            getAllPhotos().then(allPhotos => {
+                lightboxPhotos = allPhotos.map(p => p.photoData);
+                lightboxIndex = lightboxPhotos.indexOf(dataUrl);
+                if (lightboxIndex === -1) lightboxIndex = 0;
+                document.getElementById('lightbox-img').src = dataUrl;
+                document.getElementById('lightbox').classList.add('active');
+            });
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+
+        function lightboxNav(dir) {
+            lightboxIndex += dir;
+            if (lightboxIndex < 0) lightboxIndex = lightboxPhotos.length - 1;
+            if (lightboxIndex >= lightboxPhotos.length) lightboxIndex = 0;
+            document.getElementById('lightbox-img').src = lightboxPhotos[lightboxIndex];
+        }
+
+        // ========== 行前清单：渲染 & 编辑 ==========
         function renderChecklist() {
             const container = document.getElementById('checklist-container');
             container.innerHTML = '';
@@ -990,21 +1651,36 @@
             checklist.forEach((category, catIndex) => {
                 const categoryDiv = document.createElement('div');
                 categoryDiv.className = 'checklist-category';
+                
+                let itemsHtml = category.items.map((item, itemIndex) => {
+                    let deleteBtn = checklistEditMode ? `<button class="delete-item-btn" onclick="deleteChecklistItem(${catIndex}, ${itemIndex})">删除</button>` : '';
+                    let editInput = checklistEditMode ? `<input class="inline-edit-input" value="${item.name}" style="flex:1;" onchange="updateChecklistItemName(${catIndex}, ${itemIndex}, this.value)">` : `<label for="check-${catIndex}-${itemIndex}">${item.name}</label>`;
+                    return `
+                        <div class="checklist-item">
+                            <input type="checkbox" id="check-${catIndex}-${itemIndex}" 
+                                   ${item.checked ? 'checked' : ''} 
+                                   onchange="toggleCheckItem(${catIndex}, ${itemIndex})">
+                            ${editInput}
+                            ${deleteBtn}
+                        </div>
+                    `;
+                }).join('');
+                
+                let addItemBtn = checklistEditMode ? `<button class="add-btn" onclick="addChecklistItem(${catIndex})" style="margin-top:10px; padding:6px 12px; font-size:0.85em;">＋ 添加物品</button>` : '';
+                let deleteCatBtn = checklistEditMode ? `<button class="delete-item-btn" onclick="deleteChecklistCategory(${catIndex})">删除分类</button>` : '';
+                
                 categoryDiv.innerHTML = `
                     <div class="category-header">
-                        <div class="category-title">${category.name}</div>
+                        <div class="category-title">
+                            ${checklistEditMode ? `<input class="inline-edit-input" value="${category.name}" style="width:200px;" onchange="updateCategoryName(${catIndex}, this.value)">` : category.name}
+                            ${deleteCatBtn}
+                        </div>
                         <div class="category-progress">已完成 <span id="progress-${catIndex}">0</span>/${category.items.length}</div>
                         <button class="select-all-btn" onclick="toggleCategory(${catIndex})">全选</button>
                     </div>
                     <div id="category-items-${catIndex}">
-                        ${category.items.map((item, itemIndex) => `
-                            <div class="checklist-item">
-                                <input type="checkbox" id="check-${catIndex}-${itemIndex}" 
-                                       ${item.checked ? 'checked' : ''} 
-                                       onchange="toggleCheckItem(${catIndex}, ${itemIndex})">
-                                <label for="check-${catIndex}-${itemIndex}">${item.name}</label>
-                            </div>
-                        `).join('')}
+                        ${itemsHtml}
+                        ${addItemBtn}
                     </div>
                 `;
                 container.appendChild(categoryDiv);
@@ -1012,15 +1688,68 @@
             
             updateChecklistProgress();
         }
-        
-        // 切换清单项
+
+        function updateCategoryName(catIndex, newName) {
+            checklist[catIndex].name = newName;
+            saveToLocalStorage();
+        }
+
+        function updateChecklistItemName(catIndex, itemIndex, newName) {
+            checklist[catIndex].items[itemIndex].name = newName;
+            saveToLocalStorage();
+        }
+
+        function addChecklistItem(catIndex) {
+            const name = prompt('物品名称：');
+            if (!name) return;
+            checklist[catIndex].items.push({ name, checked: false });
+            renderChecklist();
+            saveToLocalStorage();
+        }
+
+        function deleteChecklistItem(catIndex, itemIndex) {
+            if (confirm('确定删除这个物品吗？')) {
+                checklist[catIndex].items.splice(itemIndex, 1);
+                renderChecklist();
+                saveToLocalStorage();
+            }
+        }
+
+        function deleteChecklistCategory(catIndex) {
+            if (confirm(`确定删除"${checklist[catIndex].name}"这个分类吗？`)) {
+                checklist.splice(catIndex, 1);
+                renderChecklist();
+                saveToLocalStorage();
+            }
+        }
+
+        function toggleChecklistEdit() {
+            checklistEditMode = !checklistEditMode;
+            renderChecklist();
+        }
+
+        function showAddCategoryModal() {
+            document.getElementById('add-category-modal').style.display = 'flex';
+        }
+        function closeAddCategoryModal() {
+            document.getElementById('add-category-modal').style.display = 'none';
+            document.getElementById('new-cat-name').value = '';
+        }
+        function addNewCategory() {
+            const name = document.getElementById('new-cat-name').value.trim();
+            if (!name) { alert('请输入分类名称'); return; }
+            checklist.push({ name, items: [] });
+            closeAddCategoryModal();
+            renderChecklist();
+            saveToLocalStorage();
+        }
+
         function toggleCheckItem(catIndex, itemIndex) {
             checklist[catIndex].items[itemIndex].checked = !checklist[catIndex].items[itemIndex].checked;
             updateChecklistProgress();
             saveToLocalStorage();
         }
-        
-        // 全选/取消全选类别
+
         function toggleCategory(catIndex) {
             const category = checklist[catIndex];
             const allChecked = category.items.every(item => item.checked);
@@ -1030,8 +1759,7 @@
             renderChecklist();
             saveToLocalStorage();
         }
-        
-        // 更新清单进度
+
         function updateChecklistProgress() {
             checklist.forEach((category, catIndex) => {
                 const checkedCount = category.items.filter(item => item.checked).length;
@@ -1041,8 +1769,8 @@
                 }
             });
         }
-        
-        // 添加消费记录
+
+        // ========== 消费记录 ==========
         function addExpense() {
             const date = document.getElementById('expense-date').value;
             const category = document.getElementById('expense-category').value;
@@ -1073,7 +1801,6 @@
             saveToLocalStorage();
         }
         
-        // 删除消费记录
         function deleteExpense(id) {
             expenses = expenses.filter(e => e.id !== id);
             renderExpenses();
@@ -1081,7 +1808,6 @@
             saveToLocalStorage();
         }
         
-        // 渲染消费记录
         function renderExpenses() {
             const tbody = document.getElementById('expense-list');
             tbody.innerHTML = '';
@@ -1102,7 +1828,6 @@
             renderChart();
         }
         
-        // 渲染图表
         function renderChart() {
             const chartContainer = document.getElementById('expense-chart');
             if (!chartContainer) return;
@@ -1131,10 +1856,13 @@
             });
         }
         
-        // 更新统计
         function updateStats() {
             const checkedCount = attractions.filter(a => a.checked).length;
-            document.getElementById('checked-count').textContent = checkedCount;
+            // 更新概览卡片中的已打卡数
+            const checkedCard = overviewCards.find(c => c.label === '已打卡');
+            if (checkedCard) checkedCard.number = checkedCount.toString();
+            renderOverview();
+            
             const statsEl = document.getElementById('attraction-stats');
             if (statsEl) statsEl.textContent = checkedCount;
             
@@ -1145,18 +1873,169 @@
             document.getElementById('avg-expense').textContent = `¥${avg.toFixed(2)}`;
             document.getElementById('expense-count').textContent = expenses.length;
         }
-        
-        // 保存到 localStorage
+
+        // ========== 分享页面生成 ==========
+        function generateShare() {
+            const container = document.getElementById('share-content');
+            
+            getAllPhotos().then(allPhotos => {
+                // 获取已打卡的景点
+                const checkedAttractions = attractions.filter(a => a.checked);
+                
+                if (checkedAttractions.length === 0 && allPhotos.length === 0) {
+                    container.innerHTML = `
+                        <div class="no-data-tip">
+                            <div class="no-data-icon">📷</div>
+                            <p>还没有打卡照片</p>
+                            <p style="font-size:0.9em; margin-top:8px;">去"景点打卡"页面打卡并上传照片后，<br>再来生成分享内容吧！</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                // 按景点分组照片
+                const attrPhotosMap = {};
+                checkedAttractions.forEach(attr => {
+                    attrPhotosMap[attr.id] = { attr, photos: [] };
+                });
+                allPhotos.forEach(photo => {
+                    if (attrPhotosMap[photo.attractionId]) {
+                        attrPhotosMap[photo.attractionId].photos.push(photo);
+                    }
+                });
+
+                // 生成分享文案
+                let shareText = `🌸 关西7日游打卡分享 🌸\n`;
+                shareText += `——————————————\n`;
+                shareText += `📅 出行日期：2026年5月4日 - 5月10日\n`;
+                shareText += `📍 目的地：京都 · 大阪 · 奈良 · 宇治\n`;
+                shareText += `✅ 已打卡 ${checkedAttractions.length} 个景点\n`;
+                shareText += `——————————————\n`;
+                checkedAttractions.forEach((attr, i) => {
+                    shareText += `\n${i+1}. ${attr.name}`;
+                    const photos = attrPhotosMap[attr.id] ? attrPhotosMap[attr.id].photos : [];
+                    if (photos.length > 0) {
+                        shareText += `（📷 ${photos.length}张照片）`;
+                    }
+                    shareText += `\n`;
+                });
+                shareText += `\n——————————————\n`;
+                shareText += `💰 本次旅行共消费 ¥${expenses.reduce((s,e)=>s+e.amount,0).toFixed(0)}\n`;
+                shareText += `📱 用「关西7日游攻略」管理行程 > `;
+
+                // 渲染分享预览
+                let cardsHtml = '';
+                checkedAttractions.forEach(attr => {
+                    const photos = attrPhotosMap[attr.id] ? attrPhotosMap[attr.id].photos : [];
+                    const photosHtml = photos.length > 0 ? `
+                        <div class="share-attraction-photos">
+                            ${photos.map(p => `<img class="share-photo" src="${p.photoData}" alt="${attr.name}" onclick="openLightbox('${p.photoData}')">`).join('')}
+                        </div>
+                    ` : '<div style="color:#999; font-size:0.9em; margin-top:8px;">暂无照片</div>';
+                    
+                    cardsHtml += `
+                        <div class="share-attraction-item">
+                            <div style="flex:1;">
+                                <div style="font-weight:bold; color:#333;">${attr.checked ? '✅' : '⬜'} ${attr.name}</div>
+                                <div style="font-size:0.85em; color:#666; margin-top:4px;">${attr.time} | ${attr.ticket}</div>
+                            </div>
+                        </div>
+                        ${photosHtml}
+                    `;
+                });
+
+                container.innerHTML = `
+                    <div class="share-preview-container">
+                        <div class="share-card">
+                            <div class="share-card-header">
+                                <div style="font-size:1.3em; font-weight:bold;">🌸 我的关西之旅</div>
+                                <div style="font-size:0.9em; opacity:0.9; margin-top:6px;">2026年5月 | 7天6晚</div>
+                            </div>
+                            <div class="share-card-body">
+                                ${cardsHtml}
+                            </div>
+                        </div>
+                        
+                        <div class="share-card">
+                            <div class="share-card-header" style="background: linear-gradient(135deg, #28a745 0%, #20c997 100%);">
+                                <div style="font-size:1.1em; font-weight:bold;">📝 分享文案</div>
+                            </div>
+                            <div class="share-card-body">
+                                <textarea class="share-text-area" id="share-text">${shareText}</textarea>
+                                <div class="share-actions">
+                                    <button class="share-action-btn share-wechat-btn" onclick="shareToWechat()">📲 微信分享</button>
+                                    <button class="share-action-btn share-copy-btn" onclick="copyShareText()">📋 复制文案</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function shareToWechat() {
+            if (isWeChat()) {
+                showShareTip();
+            } else {
+                alert('请在微信中打开此页面以使用微信分享功能');
+            }
+        }
+
+        function copyShareText() {
+            const text = document.getElementById('share-text').value;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(() => {
+                    alert('✅ 文案已复制到剪贴板！');
+                }).catch(() => {
+                    fallbackCopy(text);
+                });
+            } else {
+                fallbackCopy(text);
+            }
+        }
+
+        function fallbackCopy(text) {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            try {
+                document.execCommand('copy');
+                alert('✅ 文案已复制到剪贴板！');
+            } catch(e) {
+                alert('复制失败，请手动复制');
+            }
+            document.body.removeChild(ta);
+        }
+
+        // ========== 工具函数 ==========
+        function isWeChat() {
+            const ua = navigator.userAgent.toLowerCase();
+            return ua.indexOf('micromessenger') !== -1;
+        }
+
+        function showShareTip() {
+            if (isWeChat()) {
+                const tip = document.getElementById('wechat-share-tip');
+                tip.style.display = 'block';
+                setTimeout(() => { tip.style.display = 'none'; }, 3000);
+            }
+        }
+
+        // ========== 本地存储 ==========
         function saveToLocalStorage() {
             const data = {
                 attractions: attractions,
                 checklist: checklist,
-                expenses: expenses
+                expenses: expenses,
+                overviewCards: overviewCards,
+                timelineDays: timelineDays
             };
             localStorage.setItem('kansaiTravelData', JSON.stringify(data));
         }
-        
-        // 从 localStorage 加载
+
         function loadFromLocalStorage() {
             const saved = localStorage.getItem('kansaiTravelData');
             if (saved) {
@@ -1165,20 +2044,21 @@
                     attractions = data.attractions || attractions;
                     checklist = data.checklist || checklist;
                     expenses = data.expenses || expenses;
+                    overviewCards = data.overviewCards || overviewCards;
+                    timelineDays = data.timelineDays || timelineDays;
                 } catch (e) {
                     console.error('加载数据失败:', e);
                 }
             }
         }
-        
-        // 禁止双指缩放（iOS）
+
+        // ========== 禁止双指缩放（iOS）==========
         document.addEventListener('touchstart', function(event) {
             if (event.touches.length > 1) {
                 event.preventDefault();
             }
         }, { passive: false });
-        
-        // 禁止双击缩放
+
         let lastTouchEnd = 0;
         document.addEventListener('touchend', function(event) {
             const now = Date.now();
